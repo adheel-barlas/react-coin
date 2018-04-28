@@ -1,4 +1,4 @@
 /*
     API Root URL
 */
-export const API_URL = 'https://api.udilla.com/coins/v1';
+export const API_URL = 'https://api.udilia.com/coins/v1';
