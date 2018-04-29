@@ -21,6 +21,10 @@ class List extends React.Component {
     }
 
     componentDidMount(){
+        this.fetchCurrencies();
+    }
+
+    fetchCurrencies(){
         this.setState({
             loading: true
         });
@@ -53,7 +57,19 @@ class List extends React.Component {
         } else {
           return <span>{percent}</span>
         }
-      }
+    }
+
+    handlePaginationClick = (direction) =>{
+        let nextPage = this.state.page;
+
+        // Increment next page 
+        nextPage = direction === 'next' ? nextPage + 1 : nextPage -1;
+
+        this.setState({ page: nextPage }, () =>{
+            // Fetch currencies when page state has changed
+            this.fetchCurrencies();
+        });
+    }
 
     render(){
     const { loading, error, currencies, totalPages, page } = this.state;
@@ -76,6 +92,7 @@ class List extends React.Component {
         <Pagination 
         totalPages = {totalPages}
         page = {page}
+        handlePaginationClick = {this.handlePaginationClick}
         />
       </div>
     );
