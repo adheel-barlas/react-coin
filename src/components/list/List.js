@@ -14,6 +14,8 @@ class List extends React.Component {
             loading: false,
             currencies: [],
             error: null,
+            totalPages: 0,
+            page: 1,
         };
     }
 
