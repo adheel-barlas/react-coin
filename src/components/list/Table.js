@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { renderChangePercent } from '../../helpers'; 
 import './Table.css';
 
 const Table = (props) => {
