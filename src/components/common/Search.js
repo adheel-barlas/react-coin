@@ -6,23 +6,40 @@ class Search extends React.Component {
     constructor(){
         super();
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            searchQuery: '',
+            firstname: '',
+        }
 
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         
     }
 
     handleSubmit(event){
         event.preventDefault();
         
-        console.log(this.searchQuery.value);
-        console.log(this.firstname.value);
+        console.log(this.state);
+    }
+
+    handleChange(event){
+       const inputName = event.target.name;
+       const inputValue = event.target.value;
+
+        if(inputName === 'searchQuery'){
+            this.setState({ searchQuery: inputValue })
+        } 
+        else if (inputName === 'firstname'){
+            this.setState({ firstname: inputValue })
+        }
+
     }
 
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <input ref={(input) => this.searchQuery = input} />
-                <input ref={(input) => this.firstname = input} />
+                <input name="searchQuery" onChange={this.handleChange} />
+                <input name="firstname" onChange={this.handleChange} />
                 <button>Submit</button>
             </form>
         );
