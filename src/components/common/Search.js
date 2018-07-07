@@ -10,6 +10,7 @@ class Search extends React.Component {
         super();
 
         this.state = {
+            searchResults: [],
             searchQuery: '',
             loading: false,
         }
@@ -33,11 +34,28 @@ class Search extends React.Component {
         fetch(`${API_URL}/autocomplete?searchQuery=${searchQuery}`)
             .then(handleResponse)
             .then((result) => {
-                console.log(result);
-
-                this.setState({ loading: false });
+                this.setState({ 
+                    loading: false,
+                    searchResults: result, 
+                });
             });
 
+    }
+
+    renderSearchResults(){
+        const { searchResults } = this.state;
+
+        return(
+            <div className="Search-result-container">
+                {searchResults.map(result => (
+                    <div
+                        key={ result.id } 
+                        className="Search-result">
+                        { result.name } ({ result.symbol })
+                    </div>
+                ))}
+            </div>
+        );
     }
 
     render(){
@@ -60,6 +78,8 @@ class Search extends React.Component {
                         width="12px"
                         height="12px" />
                 </div> }
+
+                { this.renderSearchResults() }
 
             </div>
         );
